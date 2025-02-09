@@ -1,0 +1,746 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>LDAP/S</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1863ffbc-d6e8-80fa-91da-d1b4fc149f1c" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://www.notion.so/icons/server_gray.svg"/></div><h1 class="page-title">LDAP/S</h1><p class="page-description"></p></header><div class="page-body"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1863ffbc-d6e8-8094-939b-dd831712a76b"><div style="width:100%"><h3 id="1873ffbc-d6e8-807d-a711-dccc828ded6d" class="">Lightweight Direactory Access Protocol</h3><p id="1873ffbc-d6e8-8075-87b9-ce76bc984ad0" class="">
+</p><blockquote id="1873ffbc-d6e8-805b-93e7-fcbd671ef10d" class=""><mark class="highlight-red"><mark class="highlight-gray_background"><strong>LDAP in short: who can do what to which data</strong></mark></mark></blockquote><h2 id="1863ffbc-d6e8-80ec-9c14-cfb9041fece9" class="">Key Concepts</h2><ol type="1" id="1863ffbc-d6e8-80c2-bdc5-edb6f2e1c922" class="numbered-list" start="1"><li><strong>Directory</strong>: A specialized database optimized for reading, browsing, and searching. It stores information in a tree-like structure.</li></ol><ol type="1" id="1863ffbc-d6e8-8014-a5da-d2a8abfdfd8e" class="numbered-list" start="2"><li><strong>Entries</strong>: Each item in the directory is called an entry. Entries are composed of attributes</li></ol><ol type="1" id="1863ffbc-d6e8-8000-bb9f-d966b91cd1c6" class="numbered-list" start="3"><li><strong>Attributes</strong>: Key-value pairs that store data (<code>cn=John Doe</code>, <code>mail=johndoe@example.com</code>)</li></ol><ol type="1" id="1863ffbc-d6e8-80af-94ea-c986b4509c9f" class="numbered-list" start="4"><li><strong>Distinguished Name (DN)</strong>: A unique identifier for an entry in the directory.(<code>cn=John Doe,ou=Users,dc=example,dc=com</code>).</li></ol><ol type="1" id="1863ffbc-d6e8-8019-956c-ecad534e8302" class="numbered-list" start="5"><li><strong>Schema</strong>: Defines the structure and rules for the directory, including object classes and attribute types.</li></ol><ol type="1" id="1863ffbc-d6e8-800f-a264-c646f9c0b3d8" class="numbered-list" start="6"><li><strong>Base DN</strong>: The root of the directory tree (<code>dc=example,dc=com</code>)</li></ol><p id="1863ffbc-d6e8-8016-9115-d3b10b708948" class="">It is commonly used for accessing directories that store information about users, groups, devices, and other resources in a hierarchical structure.</p><p id="1863ffbc-d6e8-801f-9666-fcc5d4730345" class=""><strong>Active Directory</strong>: Mostly used in Windows.<br/><br/><strong>OpenLDAP</strong>: Mostly used in Linux based. Non commercial.</p><p id="1863ffbc-d6e8-80eb-ac31-f7178f2a6862" class="">Diffrent LDAP servers might be helpful to manage the request from user based on their geoghraphical location. It prevents all different services to have their own database and removes to manage the authentication for different services.</p><h2 id="1873ffbc-d6e8-80e8-bc73-d3a90814d526" class=""><strong>Why LDAP?</strong></h2><ul id="1873ffbc-d6e8-8022-bc06-ce26b1c613c9" class="bulleted-list"><li style="list-style-type:disc"><strong>Centralized Management</strong>: LDAP allows organizations to manage users, devices, and resources in one place.</li></ul><ul id="1873ffbc-d6e8-8074-9f84-c4a3331a3314" class="bulleted-list"><li style="list-style-type:disc"><strong>Scalability</strong>: LDAP directories can handle large amounts of data efficiently.</li></ul><ul id="1873ffbc-d6e8-80cc-afd5-c4705bc0b492" class="bulleted-list"><li style="list-style-type:disc"><strong>Interoperability</strong>: LDAP is supported by many systems and applications.</li></ul><ul id="1873ffbc-d6e8-80b1-b95e-e57b261bfa43" class="bulleted-list"><li style="list-style-type:disc"><strong>Security</strong>: LDAP supports encryption and secure authentication methods.</li></ul><h2 id="1873ffbc-d6e8-80a2-8c23-c7eea8ead3e8" class="">LDAP vs Databases</h2><p id="1873ffbc-d6e8-8008-9e87-df5877a784ff" class="">LDAP is characterized as a write-once-read-many-times service. That is to say, the type of data that would normally be stored in an LDAP service would not be expected to change on every access. To illustrate: LDAP would not be suitable for maintaining banking transaction records since, by their nature, they change on almost every access (transaction). LDAP would, however, be eminently suitable for maintaining details of the bank branches, hours of opening, employees, and so on which change far less frequently.</p><h2 id="1873ffbc-d6e8-8001-8769-fd658bf93972" class=""><strong>Data Synchronisation and Replication</strong></h2><p id="1873ffbc-d6e8-80df-8f69-e644769427ff" class=""><strong>Replication</strong> in LDAP is like making copies of a document and sharing it with others. Imagine you have a master copy of a document (the <strong>master LDAP server</strong>), and you want to share it with your friends (the <strong>slave LDAP servers</strong> or <strong>replicas</strong>). Replication is the process of copying the master document and sending it to your friends so they all have the same information.</p><ul id="1873ffbc-d6e8-8020-8a92-c438c62312f5" class="bulleted-list"><li style="list-style-type:disc"><strong>Master Server</strong>: The main server where changes are made (e.g., adding a new user or updating someone’s department).</li></ul><ul id="1873ffbc-d6e8-807d-9694-dddafc02e6e5" class="bulleted-list"><li style="list-style-type:disc"><strong>Slave/Replica Servers</strong>: The servers that receive copies of the data from the master server.</li></ul><p id="1873ffbc-d6e8-80aa-a818-e1a9e449b706" class=""><strong>Synchronization</strong> is the process of making sure all the copies of the document (the LDAP servers) are the same. If you make a change to the master document (e.g., correcting a typo), synchronization ensures that all your friends’ copies are updated with the same correction.</p><h3 id="1873ffbc-d6e8-8088-a71f-d8873c00b88e" class=""><strong>What Happens During the Replication Cycle?</strong></h3><p id="1873ffbc-d6e8-80a2-bc58-f7094de1dcff" class="">Because replication is asynchronous, there’s a short time when the master and replicas might have different information. For example:</p><ul id="1873ffbc-d6e8-80f3-ae7f-e12f126757ed" class="bulleted-list"><li style="list-style-type:disc">The master server shows Bob in the <strong>Sales Department</strong>.</li></ul><ul id="1873ffbc-d6e8-8008-9602-c41cec9440bd" class="bulleted-list"><li style="list-style-type:disc">A replica server might still show Bob in the <strong>Accounting Department</strong> until it receives and applies the update.</li></ul><p id="1873ffbc-d6e8-80a5-a8ec-fd62aa7f2d79" class="">This temporary difference is called <strong>inconsistency</strong>. In modern LDAP systems, this inconsistency usually lasts for less than a second, but it can’t be completely eliminated. Most applications don’t mind these tiny inconsistencies because they don’t cause any real problems.</p><h2 id="1873ffbc-d6e8-8059-b09a-ef890f3bba44" class="">LDAP Information Model</h2><p id="1873ffbc-d6e8-809c-b354-c8a81a3a001d" class="">LDAP enabled directories use a data model that <strong>represents</strong> the data as a hierarchy of objects. This does not imply that LDAP is an object-oriented database. LDAP itself is a protocol that allows access to an LDAP enabled service and does not define how the data is stored - but the operational primitives (read, delete, modify) operate on a model (description/representation) of the data that has object-like characteristics.</p><h3 id="1873ffbc-d6e8-80d9-8dbb-c6ec00e23331" class=""><strong>Object Tree Structure</strong></h3><p id="1873ffbc-d6e8-80d3-9d5e-e33697d78ee1" class="">Data is represented in an LDAP system as a hierarchy of objects, each of which is called an entry. The resulting tree structure is called a Directory Information Tree (DIT). The top of the tree is commonly called the root (a.k.a base or the suffix).</p><p id="1873ffbc-d6e8-8084-905e-daa847555a83" class="">Each <strong>entry</strong> in the tree has one parent entry (object) and zero or more child entries (objects). Each child entry (object) is a sibling of its parent&#x27;s other child entries.</p><p id="1873ffbc-d6e8-8001-aa90-fe9af1863fb1" class="">Each entry is composed of (is an instance of) one or more objectClasses. Objectclasses contain zero or more attributes. Attributes have names and typically contain data.</p><figure id="1873ffbc-d6e8-8066-8441-f2715bb6a8b1" class="image" style="text-align:center"><a href="images/image.png"><img style="width:600px" src="images/image.png"/></a></figure><ul id="1873ffbc-d6e8-80e5-ae01-edcaa496ef1b" class="bulleted-list"><li style="list-style-type:disc"><strong>DIT</strong>: The tree-like structure that organizes entries in an LDAP directory.</li></ul><ul id="1873ffbc-d6e8-8007-9efe-de7574fc0197" class="bulleted-list"><li style="list-style-type:disc"><strong>Entries</strong>: Represent individual objects (e.g., users, groups, devices).</li></ul><ul id="1873ffbc-d6e8-8012-b460-c5192a06d40b" class="bulleted-list"><li style="list-style-type:disc"><strong>ObjectClasses</strong>: Define what kind of entry it is and what attributes it can/must have.</li></ul><ul id="1873ffbc-d6e8-80f3-8187-cd0d6bd5b526" class="bulleted-list"><li style="list-style-type:disc"><strong>Attributes</strong>: Store specific pieces of data about an entry.</li></ul><h2 id="1873ffbc-d6e8-80d3-9e64-f928a1c34343" class="">Describing the Tree by Adding Entries</h2><p id="1873ffbc-d6e8-80b6-bad8-c2d72bd58288" class="">A parent entry must always have been added before attempting to add any child entries. Entries are composed of one or more objectClasses (only one STRUCTURAL objectClass, but zero or more AUXILIARY objectClasses) and these objectClasses act as a container for attributes. Attributes contain data, not objectClasses.</p><p id="1873ffbc-d6e8-80e5-8a83-d4503a53c67a" class="">We previously defined that when the DIT is created/populated each entry will be uniquely identifiable (relative to its parent entry) in the hierarchy. The only unique element in any data structure is the data. To uniquely identify an entry we need to identify its data content. We need to ensure that attribute and its contents should be very unique. This is done using an <strong>attribute-name=value (or data)</strong> format which is termed an Attribute Value Assertion (AVA).</p><p id="1873ffbc-d6e8-80c5-8d6e-ed5142bd10f3" class="">We can have cn=faruk,  but it may not be unique as much as we think since there maybe others named “faruk” so what we can do is that using AVA to make it more unique like department=InfoSecurityUnit.</p><h3 id="1873ffbc-d6e8-80b3-ba6c-e80b92105ba9" class="">Adding Entries</h3><p id="1873ffbc-d6e8-801b-ab8a-c9149a5920e7" class="">Adding entries may be done in a variety of ways, one of which is using <strong>LDAP Data Interchange Files (LDIF)</strong> which explained later. LDIFs are textual files that describe the tree hierarchy - the Directory Information Tree (DIT) - and the data to be added to each attribute. The following is a simple example of an LDIF file which sets up a root DN (dc=example,dc=com) and adds a three child entries under a <strong>people</strong> entry.</p><p id="1873ffbc-d6e8-80e2-a186-d4c4766b07eb" class="">LDAP Browser can also be used to add data to the DIT.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1873ffbc-d6e8-803d-9c21-db5abb917eeb"><div style="width:100%"><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/><pre id="1873ffbc-d6e8-8015-83ab-cfdb4a599416" class="code"><code class="language-Bash">version: 1
+
+## version not strictly necessary but generally good practice
+
+## DEFINE DIT ROOT/BASE/SUFFIX ####
+## uses RFC 2377 (domain name) format
+
+dn: dc=example,dc=com
+dc: example
+description: The best company in the whole world
+objectClass: dcObject
+objectClass: organization
+o: Example, Inc.
+
+## FIRST Level hierarchy - people 
+# this is an ENTRY sequence and is preceded by a BLANK line
+
+dn: ou=people, dc=example,dc=com
+ou: people
+description: All people in organisation
+objectClass: organizationalUnit
+
+## SECOND Level hierarchy - people entries 
+# this is an ENTRY sequence and is preceded by a BLANK line
+
+dn: cn=Robert Smith,ou=people,dc=example,dc=com
+objectclass: inetOrgPerson
+cn: Robert Smith
+cn: Robert
+sn: Smith
+uid: rsmith
+mail: robert@example.com
+mail: r.smith@example.com
+ou: sales
+
+## SECOND Level hierarchy - people entries 
+# this is an ENTRY sequence and is preceded by a BLANK line
+
+dn: cn=Bill Smith,ou=people,dc=example,dc=com
+objectclass: inetOrgPerson
+cn: Bill Smith
+cn: William
+sn: Smith
+uid: bsmith
+mail: bill@example.com
+mail: b.smith@example.com
+ou: support
+
+## SECOND Level hierarchy - people entries 
+# this is an ENTRY sequence and is preceded by a BLANK line
+
+dn: cn=John Smith,ou=people,dc=example,dc=com
+objectclass: inetOrgPerson
+cn: John Smith
+sn: smith
+uid: jsmith
+mail: jim@example.com
+mail: j.smith@example.com
+ou: accounting</code></pre><figure id="1873ffbc-d6e8-8087-9fba-c158dd648502" class="image" style="text-align:center"><a href="images/image 1.png"><img style="width:576.960205078125px" src="images/image 1.png"/></a></figure></div></figure><h2 id="1873ffbc-d6e8-80e5-b59d-ece7d2608781" class=""><strong>Navigating the Tree</strong></h2><p id="1873ffbc-d6e8-80e7-9426-e57bf1c70f4a" class="">The AVA, for example, cn=Robert Smith, which uniquely identifies an entry is termed the Relative Distinguished Name (RDN - Relative to its parent). The path from the root of the DIT to the entry is the sum of all the RDNs (joined by a , (comma) and in low to high (left to right) order) is termed the Distinguished Name (DN).</p><p id="1873ffbc-d6e8-800f-8972-e68964ca9751" class="">To illustrate, in our example DIT the path from the root to the entry uniquely described by the AVA cn=Robert smith goes from (RDN) dc=example,dc=com through (RDN) ou=people ending with (RDN) cn=Robert Smith. The DN would be written as <strong>cn=Robert Smith,ou=people,dc=example,dc=com</strong>.</p><p id="1873ffbc-d6e8-8055-aff3-fd416c5f4af4" class="">The following diagram illustrates the DN and RDNs.</p><figure id="1873ffbc-d6e8-80d7-a118-f250e24a7ca7" class="image" style="text-align:center"><a href="images/image 2.png"><img style="width:599.9715576171875px" src="images/image 2.png"/></a></figure><h2 id="1873ffbc-d6e8-80bc-98d0-cb9e9ba1dab6" class=""><strong>LDAP Referrals and Replication</strong></h2><h3 id="1873ffbc-d6e8-806d-bad6-d506eb0dfdb6" class=""><strong>What is Delegation in LDAP?</strong></h3><p id="1873ffbc-d6e8-80d1-8b41-ecaf472c9b18" class="">Delegation in LDAP is like giving someone else the responsibility to manage a part of the directory. For example:</p><ul id="1873ffbc-d6e8-808c-bb01-c81c773d11dc" class="bulleted-list"><li style="list-style-type:disc">A company’s main IT department manages the overall directory but delegates the management of the <strong>Sales Department’s directory</strong> to the Sales team.</li></ul><ul id="1873ffbc-d6e8-80f6-9e92-d394b5ff62fb" class="bulleted-list"><li style="list-style-type:disc">The Sales team has its own LDAP server to manage its part of the directory, but the main directory still appears as a single, unified system to users.</li></ul><h3 id="1873ffbc-d6e8-80e1-9f82-ef1a1bf01b26" class=""><strong>How Does It Work?</strong></h3><ol type="1" id="1873ffbc-d6e8-801a-96d8-e319de88fa34" class="numbered-list" start="1"><li><strong>Referrals</strong>:<ul id="1873ffbc-d6e8-80d7-ac32-dd2d85a1f589" class="bulleted-list"><li style="list-style-type:disc">When a user queries the main LDAP server for information about the Sales Department, the server doesn’t have the data itself.</li></ul><ul id="1873ffbc-d6e8-8071-911a-f9ac6a347b92" class="bulleted-list"><li style="list-style-type:disc">Instead, it returns a <strong>referral</strong> (like a pointer) to the Sales team’s LDAP server.</li></ul><ul id="1873ffbc-d6e8-8019-aae6-fd4d8149b6d2" class="bulleted-list"><li style="list-style-type:disc">The LDAP client (e.g., the user’s application) then contacts the Sales team’s server directly to get the information.</li></ul></li></ol><ul id="1873ffbc-d6e8-80a0-b5d4-fcefb04d462c" class="bulleted-list"><li style="list-style-type:disc">When a user queries the main LDAP server for information about the Sales Department, the server doesn’t have the data itself.</li></ul><ul id="1873ffbc-d6e8-8078-83e4-d52b25f5c145" class="bulleted-list"><li style="list-style-type:disc">Instead, it returns a <strong>referral</strong> (like a pointer) to the Sales team’s LDAP server.</li></ul><ul id="1873ffbc-d6e8-80da-b7c7-f3b566d7682f" class="bulleted-list"><li style="list-style-type:disc">The LDAP client (e.g., the user’s application) then contacts the Sales team’s server directly to get the information.</li></ul><ol type="1" id="1873ffbc-d6e8-80cd-8d96-f02034c4c826" class="numbered-list" start="1"><li><strong>Chaining</strong><ul id="1873ffbc-d6e8-80a9-8696-f25417b35178" class="bulleted-list"><li style="list-style-type:disc">Some LDAP servers can automatically follow the referral and get the data on behalf of the client. This is called <strong>chaining</strong>.</li></ul><ul id="1873ffbc-d6e8-803b-8a07-d33c9260f584" class="bulleted-list"><li style="list-style-type:disc">However, the LDAP standard doesn’t require servers to do this, so it’s up to the server implementation.</li></ul></li></ol><ul id="1873ffbc-d6e8-8007-b22d-fd500e5fda6c" class="bulleted-list"><li style="list-style-type:disc">Some LDAP servers can automatically follow the referral and get the data on behalf of the client. This is called <strong>chaining</strong>.</li></ul><ul id="1873ffbc-d6e8-80e9-ae80-ee5d677765d0" class="bulleted-list"><li style="list-style-type:disc">However, the LDAP standard doesn’t require servers to do this, so it’s up to the server implementation.</li></ul><h2 id="1873ffbc-d6e8-80ef-a21d-f30bf52f1d8e" class="">LDAP vs LDAPS</h2><ul id="1873ffbc-d6e8-80ce-a7b6-df6f2aeb68dc" class="bulleted-list"><li style="list-style-type:disc">LDAPS = LDAP over SSL/TLS</li></ul><ul id="1873ffbc-d6e8-80c2-b5ce-ca693e71b6e6" class="bulleted-list"><li style="list-style-type:disc">An encrypted version of LDAP ensures data transferred between the client and server is secure.</li></ul><ul id="1873ffbc-d6e8-806a-8504-e9e8d1203985" class="bulleted-list"><li style="list-style-type:disc">Operates over port 636 by default while LDAP by defaults uses 389.</li></ul><h3 id="1873ffbc-d6e8-808f-bec6-f11e63ac7808" class=""><strong>Key Differences</strong></h3><ul id="1873ffbc-d6e8-80de-8de2-df542ee67e60" class="bulleted-list"><li style="list-style-type:disc">Encryption: The most significant difference between LDAP and LDAPS is encryption. LDAPS encrypts the connection from the start, ensuring that all data (including credentials) exchanged between the client and server is encrypted. In contrast, LDAP transmits data in plain text, making it vulnerable to eavesdropping.</li></ul><ul id="1873ffbc-d6e8-8051-a231-e5bdd0c3f8de" class="bulleted-list"><li style="list-style-type:disc">Server Authentication: LDAPS allows the client to authenticate the server using SSL/TLS certificates. This ensures that clients connect to the legitimate server, protecting against man-in-the-middle attacks.</li></ul><ul id="1873ffbc-d6e8-80c9-a831-e01557480f24" class="bulleted-list"><li style="list-style-type:disc">Setup Complexity: LDAPS can be slightly more complex to set up due to the need for SSL/TLS certificates. However, this added complexity offers significant security advantages.</li></ul></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1873ffbc-d6e8-8020-b0ea-ee0ac0962b16"><div style="width:100%"><blockquote id="1873ffbc-d6e8-8039-a3a4-e0a06c4da7cc" class=""><em><mark class="highlight-red"><strong>Prepared by Ömer Faruk Avcı, Date: 26.01.2025</strong></mark></em></blockquote></div></figure><p id="1873ffbc-d6e8-80bd-ba04-d7f69cf9e44c" class="">
+</p><p id="1873ffbc-d6e8-8090-8d10-e7dc4a74f811" class="">
+</p><p id="1873ffbc-d6e8-8048-9e94-f3079daac18e" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
