@@ -7,43 +7,81 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-            background-color: #f4f4f4;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
         }
-
-        h1 {
-            color: #2c3e50;
-        }
-
-        .nav-links {
-            margin-top: 30px;
-        }
-
-        .nav-links a {
-            display: inline-block;
-            margin: 15px;
-            padding: 15px;
-            background-color: #3498db;
+        header {
+            background-color: #2C3E50;
             color: white;
-            text-decoration: none;
-            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
         }
-
-        .nav-links a:hover {
-            background-color: #2980b9;
+        table {
+            width: 80%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background-color: white;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #3498DB;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        a {
+            color: #3498DB;
+            text-decoration: none;
+        }
+        footer {
+            background-color: #2C3E50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
 <body>
 
-    <h1>Welcome to My Notion Notes!</h1>
-    <p>Choose a topic to explore:</p>
+<header>
+    <h1>Notion Notes Repository</h1>
+    <p>Organized collection of notes and resources</p>
+</header>
 
-    <div class="nav-links">
-        <a href="ldap.html">LDAP Notes</a>
-        <a href="ssl-tls.html">SSL/TLS Notes</a>
-    </div>
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Last Updated</th>
+            <th>Author</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><a href="ldap.html">LDAP Notes</a></td>
+            <td>Januray 26, 2025</td>
+            <td>faruk-avci</td>
+        </tr>
+        <tr>
+            <td><a href="ssl-tls.html">SSL/TLS Notes</a></td>
+            <td>February 9, 2025</td>
+            <td>faruk-avci</td>
+        </tr>
+    </tbody>
+</table>
+
+<footer>
+    <p>Created by Faruk Avcı</p>
+</footer>
 
 </body>
 </html>
